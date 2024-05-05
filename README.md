@@ -51,6 +51,18 @@ La documentación de `clasp` en google se encuentra en el siguiente link: `https
 8. Si hacemos cambios a los archivos en VSC
 9. Hacemos `clasp push`, y nos sube los cambios hechos a la plataforma de GAS
 
+## Prueba del proyecto
+
+1. Vamos al proyecto en GAS
+2. Damos clic en el `editor`
+3. Clic al boton azul `Implementar`
+4. Seleccionamos `Nueva implementación`
+5. Clic en `Seleccionar tipo`
+6. Seleccionamos el tipo `Aplicación web` en este caso
+7. En descripción, colocamos versión `v1.0`
+8. Copiamos o Damos clic en la URL d ela aplicación web para ver la aplicación, pero esta aplicación es la definitiva, entonces si nosotros seguimos haciendo cambios no podremos verlos reflejados en esta URL
+9. Entonces en vez de seleccionar 'Nueva implementación' seleccionamos `Implementación de prueba` y este link si me llevara a la URL que me imprimirá los cambios que ire haciendo poco a poco, cada vez que recargo la página
+
 
 
 
