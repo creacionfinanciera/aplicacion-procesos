@@ -7,3 +7,10 @@ function doGet() {
 }
 
 // entonces con lo anterior lo que conseguimos es que una vez ejecutemos la aplicación, se abra la página "web.html" que se encuentra en el otro archivo
+
+// ahora crearemos una función que lleve el código que tenemos en cada uno de los archivos ".html" al scriptlets que tendremos en la página web principal, y desde la página llamariamos la función dentro del scriptlets
+function obtenerDatosHTML(nombre) {
+
+    return HtmlService.createHtmlOutputFromFile(nombre).getContent();
+
+}

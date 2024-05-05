@@ -1,12 +1,28 @@
+<!-- esta sería mi página principal, aqui no modificaría absolutamente nada más, todo lo haría en los archivos individuales -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- archivos CSS y Bootstrap  -->
+    <?!= obtenerDatosHTML('css'); ?>
+
 </head>
 <body>
     
-    <h1>Formulario de Proveedores VEGGIES 3.0</h1>
+    <!-- HEADER -->
+    <?!= obtenerDatosHTML('header'); ?>
+
+    <!-- MAIN -->
+    <?!= obtenerDatosHTML('main'); ?>
+
+    <!-- FOOTER -->
+    <?!= obtenerDatosHTML('footer'); ?>
+
+    <!-- JAVASCRIPT -->
+    <?!= obtenerDatosHTML('js'); ?>
 
 </body>
 </html>

@@ -20,7 +20,7 @@ La documentación de `clasp` en google se encuentra en el siguiente link: `https
 5. Damos clic en `API de Google Apps Script`
 6. Activamos la API si se encuentra desactivada
 
-## Inicio de sesión
+## Creación de proyecto
 
 1. `clasp login` => nos sirve para inciar sesión y autorizar la administración de los proyectos de google apps script
 2. Nos lleva al navegador, seleccionamos la cuenta de google y autorizamos todos los permisos
@@ -31,7 +31,7 @@ La documentación de `clasp` en google se encuentra en el siguiente link: `https
     - `{} appsscript.json` => donde estan los metadatos del proyecto actual, este es el unico archivo que se carga de manera oculta
 6. Si vamos a la pantalla de "Mis proyectos" en google apps script, observaremos que nos creo el proyecto
 
-## Creación de archivo
+## Actualización VSC - GAS
 
 1. Creamos un archivo de javascript `funciones.js`, para que funcione bien el autocompletado de apps script, y despues cuando subamos los cambios, pasara a la plataforma de apps script como `funciones.gs`
 2. Escribimos una función con código en VSC y guardamos
@@ -62,6 +62,27 @@ La documentación de `clasp` en google se encuentra en el siguiente link: `https
 7. En descripción, colocamos versión `v1.0`
 8. Copiamos o Damos clic en la URL d ela aplicación web para ver la aplicación, pero esta aplicación es la definitiva, entonces si nosotros seguimos haciendo cambios no podremos verlos reflejados en esta URL
 9. Entonces en vez de seleccionar 'Nueva implementación' seleccionamos `Implementación de prueba` y este link si me llevara a la URL que me imprimirá los cambios que ire haciendo poco a poco, cada vez que recargo la página
+
+## Creación de archivos
+
+1. Todos los archivos de javascript, html y css deben crearse con extensión `.html`
+2. Creamos el archivo `css.html` que dentro tendra la etiqueta <style></style>
+3. Creamos el archivo `js.html` que dentro tendra la etiqueta <script></script>
+4. Para además de estos archivos, para dividir las partes de la página web, vamos a crear tres archivos adicionales, uno para el header, uno para el main y otro para el footer, de este modo vamos a separar del código tanto la cabecera como el pie de página
+5. Creamos el archivo `header.html` que dentro tendra la etiqueta <header></header>
+6. Creamos el archivo `footer.html` que dentro tendra la etiqueta <footer></footer>
+7. Creamos el archivo `main.html` que dentro tendra la etiqueta <main></main>
+
+## Conexión de archivos con la página web
+
+1. Esto lo haremos mediante scriptlets `<?!= ?>` en la página web principal `web.html`, para que se incluya en éste el código de otros archivos secundarios a través de una función que estaría en el archivo `funciones.js`
+2. En el `head` de la página principal insertamos el scriptlets de `CSS y Bootstrap`
+3. Y en el `body` de la página principal insertamos los scriptlets del `Header`, el `Main`, el `Footer` y `Javascript`
+4. Entonces lo único que haremos es modificar cada uno de los archivos individuales para ir modificando la aplicación 
+
+
+
+
 
 
 
