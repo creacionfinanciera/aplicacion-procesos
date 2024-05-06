@@ -92,6 +92,14 @@ La documentación de `clasp` en google se encuentra en el siguiente link: `https
 7. Copiamos el link del CDN para los iconos: `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">`
 8. Lo pegamos en la parte superior del archivo `css.html`
 
+## Conexión con google sheets
+
+Después de escribir las funciones y los métodos que traeran del archivo de google sheets los datos, crearan la tabla e insertaran los datos en la tabla, y hacer `clasp push` y recargar la página, me sale un error que dice "Se necesita autorización para realiza esta acción", y esto es que como ahora estoy accediendo a una hoja de cálculo de google sheets, necesito los permisos para acceder a esa hoja de cálculo.
+
+Entonces, vamos al editor de GAS, y damos clic en el archivo `funciones.gs` y ejecutamos la función `doGet` para que nos pida revisar los permisos, y ahí autorizamos la cuenta de correo `desarrolloveggies@gmail.com`.
+
+Ya después podemos recargar la página, y nos aparece la tabla con los datos.
+
 
 
 

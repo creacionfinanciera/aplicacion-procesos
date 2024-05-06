@@ -14,3 +14,15 @@ function obtenerDatosHTML(nombre) {
     return HtmlService.createHtmlOutputFromFile(nombre).getContent();
 
 }
+
+// esta es la función que obtendrá los datos directamente de la hoja de cálculo de google sheets
+function obtenerContactos() {
+
+    // conecta con el libro "BD Proveedores" de google sheets
+    const libroProveedores = SpreadsheetApp.openById("1K5z12RJrSl0TUvwMv8qMuBbapdjJtXdgugKNY4HnlMQ");
+    const hojaProveedores = libroProveedores.getSheetByName("Proveedores");
+    const rangoProveedores = hojaProveedores.getDataRange().getValues();
+
+    return rangoProveedores;
+
+}

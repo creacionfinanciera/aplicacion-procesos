@@ -1,5 +1,111 @@
 <script>
+    // esta función es para recuperar los datos de la hoja de cálculo de google sheets
+    function crearTablaContactos() {
+        // el método google.script.run es una función en JavaScript que te permite llamar a funciones de Google Apps Script desde el lado del cliente (es decir, desde el código que se ejecuta en el navegador del usuario) y pasar datos entre el cliente y el servidor de manera asíncrona
+        // el método ".withSuccessHandler()" es para esperar a que los datos se reciban, y en el interior ( ) es dónde pintaremos la tabla en html 
+        // la función "obtenerContatos()" es la función que realmente va a obtener los datos de google sheets, y es la función que deberá programar dentro del archivo "funciones.js", que es el archivo de google apps script
 
+        // lo primero es comprobar si existe la tabla de contactos, si no hacemos esto, cada vez que demos clic al botón se va a generar una tabla, y me va a comenzar a mostrar la tabla repetida
+        let tabla = document.getElementById('tablaContactos');
+        // si existe la tabla, borrarla
+        if (tabla) tabla.remove();
 
+        google.script.run.withSuccessHandler(
+            //  con esta función vamos a crear la tabla
+            function(obj) {
+                // y acontinuaión siempre creamos nueva, la tabla en html
+                tabla = document.createElement('table');
+                // le creamos a la tabla un identificador
+                tabla.id = 'tablaContactos';
+
+                // dentro de una tabla en html, podemos tener un "header" y un "body"
+                // aqui creamos el "header"
+                let tablaHeader = document.createElement('thead');              
+                // aqui creamos el "body", dentro de este cuerpo vamos a insertar cada uno de los datos que nos encontremos en el parametro "obj", que es el objeto dónde se encuentran todos los datos
+                let tablaBody = document.createElement('tbody');
+                // asi recorremos el objeto dónde se encuentran los datos, a través de un bucle doble, tenemos un forEach que nos recorre cada una de las filas, y por cada una de esas filas tenemos un forEach que nos recorre cada una de las celdas, entonces el bucle interno lo que hace es ir creando cada una de las celdas, ponerle texto y añadirla a la fila
+                // pero debemos evaluarlo y cuando sea la primera fila, no debemos añadir la fila a la "tablaBody", sino que la debemos añadir a la "tablaHeader", entonces necesitamos un indice que nos permita hacer esto
+
+                for (let i = 0; i < obj.length; i++) {
+
+                    // primero creamos la fila
+                    let fila = document.createElement('tr');
+                    // ahora añadir a esa fila cada una de las celdas
+                    for (let j = 0; j < obj[i].length; j++) {
+
+                        // creamos la celda
+                        let celda = document.createElement('td');
+                        // Guardamos dentro de la celda el contenido
+                        celda.textContent = obj[i][j];
+                        // Una vez la celda tiene el texto, ya podemos podemos añadir la celda a la fila
+                        fila.appendChild(celda); 
+
+                    }
+                    // evalúa si el índice es 0
+                    if (i == 0) {
+
+                        // inserta la primera fila a la "tablaHeader"
+                        tablaHeader.appendChild(fila);
+                        // agrega el header a la tabla
+                        tabla.appendChild(tablaHeader);
+
+                    } else {
+
+                        // inserta la fila que ya tendra adentro cada una de las celdas
+                        tablaBody.appendChild(fila);
+
+                    }
+
+                }
+
+                /* ESTE ES EL EJEMPLO DEL BUCLE CON FOREACH
+                Array.from(obj).forEach((filaActual, i) => {
+
+                    // primero creamos la fila
+                    let fila = document.createElement('tr');
+                    // ahora añadir a esa fila cada una de las celdas
+                    filaActual.forEach(celdaActual => {
+                        // creamos la celda
+                        let celda = document.createElement('td');
+                        // Guardamos dentro de la celda el contenido
+                        celda.textContent = celdaActual;
+                        // Una vez la celda tiene el texto, ya podemos podemos añadir la celda a la fila
+                        fila.appendChild(celda); 
+                    })
+                    // evalúa si el índice es 0
+                    if (i == 0) {
+
+                        // inserta la primera fila a la "tablaHeader"
+                        tablaHeader.appendChild(fila);
+                        // agrega el header a la tabla
+                        tabla.appendChild(tablaHeader);
+
+                    } else {
+
+                        // inserta la fila que ya tendra adentro cada una de las celdas
+                        tablaBody.appendChild(fila);
+
+                    }
+
+                });
+                */
+                
+                // agreguemos clases a la cabecera
+                tablaHeader.classList.add('table-dark');
+                
+                // ya tenemos cada una de las filas agregadas al body, y ahora lo que falta es agregar el body a la tabla
+                tabla.appendChild(tablaBody);
+                
+                // con lo anterior ya tenemos la tabla montada, ahora lo que vamos a hacer es añadir una serie de clases de Bootstrapt, por ejemplo la clase "table-success", la encontramos en la página de bootstrap, buscando por tabla
+                tabla.classList.add('table','table-striped','border','border-3','table-success');
+                
+                // en este punto ya podemos añadir la tabla a la estructura principal de la página, y esto lo vamos a insertar en el "div" que hemos creado previamente en el "main", con el id="divContactos"
+                document.getElementById('divContactos').appendChild(tabla);
+
+            }
+
+        ).obtenerContactos();
+
+    }
     
 </script>
