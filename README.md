@@ -62,6 +62,7 @@ La documentación de `clasp` en google se encuentra en el siguiente link: `https
 7. En descripción, colocamos versión `v1.0`
 8. Copiamos o Damos clic en la URL d ela aplicación web para ver la aplicación, pero esta aplicación es la definitiva, entonces si nosotros seguimos haciendo cambios no podremos verlos reflejados en esta URL
 9. Entonces en vez de seleccionar 'Nueva implementación' seleccionamos `Implementación de prueba` y este link si me llevara a la URL que me imprimirá los cambios que ire haciendo poco a poco, cada vez que recargo la página
+10. Cuando estemos trabajando y haciendo cambios en VSC, es buena práctica, hacer primero `clasp pull` y después hacer `clasp push`, de esta manera en la terminal no pregunta si deseamos sobreescribir los archivos, y sencillamente despues recargamos la página dónde se encuentra la aplicación y se visualizan los cambios. Pero es importante saber que al hacer pull me actualiza la información con esta en la plataforma de GAS, entonces tener cuidado de no borrar lo ultimo que hemos hecho. Este problema tiene que ver con la actualización correcta del archivo `appsscript.json`.
 
 ## Creación de archivos
 
@@ -86,8 +87,10 @@ La documentación de `clasp` en google se encuentra en el siguiente link: `https
 2. Copiamos el link con la librería de css de Bootstrapt: `<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">`
 3. Lo pegamos en la parte superior del archivo `css.html`
 4. Copiamos el link con la librería de javascript Bootstrapt: `<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>`
-5. Vamos a la sección de iconos, clic en install
-6. Copiamos el link del CDN para los iconos: `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">`
+5. Lo pegamos en la parte superior del archivo `css.html`
+6. Vamos a la sección de iconos, clic en install
+7. Copiamos el link del CDN para los iconos: `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">`
+8. Lo pegamos en la parte superior del archivo `css.html`
 
 
 
