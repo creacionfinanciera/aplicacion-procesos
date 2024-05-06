@@ -78,7 +78,16 @@ La documentación de `clasp` en google se encuentra en el siguiente link: `https
 1. Esto lo haremos mediante scriptlets `<?!= ?>` en la página web principal `web.html`, para que se incluya en éste el código de otros archivos secundarios a través de una función que estaría en el archivo `funciones.js`
 2. En el `head` de la página principal insertamos el scriptlets de `CSS y Bootstrap`
 3. Y en el `body` de la página principal insertamos los scriptlets del `Header`, el `Main`, el `Footer` y `Javascript`
-4. Entonces lo único que haremos es modificar cada uno de los archivos individuales para ir modificando la aplicación 
+4. Entonces lo único que haremos es modificar cada uno de los archivos individuales para ir modificando la aplicación
+
+## Conexión con Bootstrapt
+
+1. Vamos a la página de Bootstrapt 5, get started
+2. Copiamos el link con la librería de css de Bootstrapt: `<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">`
+3. Lo pegamos en la parte superior del archivo `css.html`
+4. Copiamos el link con la librería de javascript Bootstrapt: `<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>`
+5. Vamos a la sección de iconos, clic en install
+6. Copiamos el link del CDN para los iconos: `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">`
 
 
 
