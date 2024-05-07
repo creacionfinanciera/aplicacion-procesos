@@ -1,5 +1,50 @@
 <script>
     
+    
+    function crearContacto() {
+        
+        // obtener datos
+        let identificacion = document.getElementById('identificacion').value;
+        let nombre = document.getElementById('nombre').value;
+        let municipio = document.getElementById('municipio').value;
+
+        // eliminamos la tabla
+        eliminarTabla();
+
+        // aqui procedemos a crear el loder o icono de procesamiento
+        // crearLoader('divContactos'); // este codigo no funciona entonces lo dejo comentado
+
+        google.script.run
+        .withSuccessHandler(contactoInsertadoCorrectamente)
+        .withFailureHandler(contactoInsertadoError)
+        .insertarContacto(identificacion, nombre, municipio);
+
+    }
+
+    function contactoInsertadoCorrectamente() {
+
+        // eliminamos los datos de los inputs
+        document.getElementById('identificacion').value = '';
+        document.getElementById('nombre').value = '';
+        document.getElementById('municipio').value = '';
+
+        // mostrar notificacion
+        crearNotificacionOK('Contacto insertado correctamente', 'CONTACTO OK');
+
+        // eliminaremos el loader
+        // eliminarLoader(); // este codigo no funciona entonces lo dejo comentado
+
+    }
+    function contactoInsertadoError() {
+
+        // mostrar notificacion
+        crearIconoNotificacionError('No se ha podido insertar el contacto', 'ERROR')
+
+        // eliminaremos el loader
+        // eliminarLoader(); // este codigo no funciona entonces lo dejo comentado
+
+    }
+    
     // esta función es para recuperar los datos de la hoja de cálculo de google sheets
     function crearTablaContactos() {
         

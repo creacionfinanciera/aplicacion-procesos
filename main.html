@@ -1,8 +1,40 @@
 <main>
 
-    <!-- Botones -->
-    <div class="d-flex justify-content-center mb-4">
-        <button class="btn btn-success m-3" onclick="crearTablaContactos()">Mostrar usuarios</button>
+    <!-- Formulario -->
+    <div class="d-flex justify-content-center my-3">
+        
+        <!-- Si vamos a trabajar con el método "post" pegamos la url de la implementación de prueba -->
+        <!-- <form action="https://script.google.com/macros/s/AKfycbxVHkfk8bakJwL9IOfizg6SZmcTP_vPW8J-h9J0Ugc/dev" method="post" id="formulario"></form> -->
+
+        <!-- pero nosotros vamos a trabajar con el método "dialog" que es mucho más eficiente, y con el cual vinculamos una función que debemos programar tambien en nuestro archivo "js.html" -->
+        <form onsubmit="crearContacto()" method="dialog" id="formulario">
+
+            <!-- creamos cada uno de los campos del formulario -->
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Introduce el nombre del proveedor</label>
+                <input type="text" class="form-control" name="nombre" id="nombre">
+            </div>
+
+            <div class="mb-3">
+                <label for="identificacion" class="form-label">Introduce el ID del proveedor</label>
+                <input type="text" class="form-control" name="identificacion" id="identificacion">
+            </div>
+
+            <div class="mb-3">
+                <label for="municipio" class="form-label">Introduce el municipio del proveedor</label>
+                <input type="text" class="form-control" name="municipio" id="municipio">
+            </div>
+
+            <!-- Botones -->
+            <!-- este es el boton para consultar los proveedores -->
+            <button type="button" class="btn btn-success m-3" onclick="crearTablaContactos()">Mostrar proveedores</button>
+
+            <!-- cuando le damos clic a este boton es que se abre el "post" -->
+            <button type="submit" class="btn btn-primary">Crear proveedor</button>
+
+
+        </form>
+
     </div>
 
     <!-- Tabla de contactos -->

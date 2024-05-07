@@ -108,6 +108,10 @@ Ya después podemos recargar la página, y nos aparece la tabla con los datos.
 
 Nota: Al correr el código de éste punto me saca un error, y no logre solucionarlo, entonces lo dejo comentado.
 
+## Creación de formulario para ingresar contactos
+
+Esta metodología es para ingresar contactos en la base de datos a través de un formulario incrustado en la misma página.
+
 
 
 
