@@ -100,6 +100,14 @@ Entonces, vamos al editor de GAS, y damos clic en el archivo `funciones.gs` y ej
 
 Ya después podemos recargar la página, y nos aparece la tabla con los datos.
 
+## Creación de ícono de procesamiento
+
+1. Vamos a la página `https://loading.io/css/`
+2. Seleccionamos uno de los íconos de procesamiento que ahí se mencionan
+3. Se despliega una ventana con el código CSS y lo copiamos
+
+Nota: Al correr el código de éste punto me saca un error, y no logre solucionarlo, entonces lo dejo comentado.
+
 
 
 

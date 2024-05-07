@@ -3,11 +3,12 @@
     // esta función es para recuperar los datos de la hoja de cálculo de google sheets
     function crearTablaContactos() {
         
-        // lo primero es comprobar si existe la tabla de contactos, si no hacemos esto, cada vez que demos clic al botón se va a generar una tabla, y me va a comenzar a mostrar la tabla repetida
-        let tabla = document.getElementById('tablaContactos');
-        // si existe la tabla, borrarla
-        if (tabla) tabla.remove();
-        
+        // lo primero es comprobar si existe la tabla de contactos, y si existe borrarla, si no hacemos esto, cada vez que demos clic al botón se va a generar una tabla, y me va a comenzar a mostrar la tabla repetida
+        eliminarTabla();
+
+        // aqui procedemos a crear el loder o icono de procesamiento
+        // crearLoader('divContactos'); // este codigo no funciona entonces lo dejo comentado
+
         // el método google.script.run es una función en JavaScript que te permite llamar a funciones de Google Apps Script desde el lado del cliente (es decir, desde el código que se ejecuta en el navegador del usuario) y pasar datos entre el cliente y el servidor de manera asíncrona
         // el método ".withSuccessHandler()" es para esperar a que los datos se reciban, y en el interior ( ) es dónde pintaremos la tabla en html 
         // la función "obtenerContatos()" es la función que realmente va a obtener los datos de google sheets, y es la función que deberá programar dentro del archivo "funciones.js", que es el archivo de google apps script
@@ -80,6 +81,9 @@
         // mostrar notificación de OK
         crearNotificacionOK('Proveedores obtenidos correctamente', 'Todo en orden')
 
+        // eliminaremos el loader
+        // eliminarLoader(); // este codigo no funciona entonces lo dejo comentado
+
     }
 
     // esta es la función que se va a ejecutar si tenemos un error al consultar los datos
@@ -87,6 +91,9 @@
         
         // mostrar notificación de error
         crearNotificacionError('No se han podido leer los proveedores', 'ERROR')
+
+        // eliminaremos el loader
+       // eliminarLoader(); // este codigo no funciona entonces lo dejo comentado
 
     }
     
@@ -153,5 +160,44 @@
         elementoNotificacion.style.backgroundColor = getComputedStyle(document.documentElement).getPropertyValue(color);
 
     }
+
+    // esta función es para colocar el loader en la parte de la página que nosotros queramos
+    // la siguiente es la estructura con la que se carga en el html, que tambien es tomada de la página, y con base en ella es que vamos a construir la función
+    // <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+    // <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+
+    function crearLoder(elementoPadre) {
+
+        // y aqui para evitarnos problemas, siempre que creemos el loader, para tener únicamente uno vamos a buscarlo, y si previamente lo encontramos lo borramos
+        eliminarLoader();
+        
+        let loader = document.createElement('div');
+        loader.id = 'loader';
+        loader.appendChild(document.createElement('div'));
+        loader.appendChild(document.createElement('div'));
+        loader.appendChild(document.createElement('div'));
+        loader.appendChild(document.createElement('div'));
+        loader.classList.add('lds-ellipsis');
+
+        // entonces cuando creemos este icono de carga, deberemos pasarle como parámetro el mombre de "id" del "div" donde vamos a incluir dentro el ícono de carga
+        document.getElementById(elementoPadre).appendChild(loader);
+
+    }
+
+    // ahora vamos a hacer otra función que haga lo contrario, que busque el elemento, y si lo encuentra, lo destruya, para poder eliminarlo cuando haya terminado la carga de los datos
+    function eliminarLoader() {
+
+        let loader = document.getElementById('loader');
+        if (loader) loader.remove();
+
+    }
+
+    function eliminarTabla() {
+
+        let tabla = document.getElementById('tablaContactos');
+        if (tabla) tabla.remove();
+
+    }
+
     
 </script>
