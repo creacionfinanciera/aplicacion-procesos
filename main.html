@@ -5,36 +5,16 @@
         
         <!-- Si vamos a trabajar con el método "post" pegamos la url de la implementación de prueba -->
         <!-- <form action="https://script.google.com/macros/s/AKfycbxVHkfk8bakJwL9IOfizg6SZmcTP_vPW8J-h9J0Ugc/dev" method="post" id="formulario"></form> -->
-
         <!-- pero nosotros vamos a trabajar con el método "dialog" que es mucho más eficiente, y con el cual vinculamos una función que debemos programar tambien en nuestro archivo "js.html" -->
-        <form onsubmit="crearContacto()" method="dialog" id="formulario">
+        <!-- aqui iba el formulario que incrustamos en el modal, si lo que quiero es que este en la página lo pongo aqui, pero en este caso lo vamos a hacer tipo modal -->
 
-            <!-- creamos cada uno de los campos del formulario -->
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Introduce el nombre del proveedor</label>
-                <input type="text" class="form-control" name="nombre" id="nombre">
-            </div>
-
-            <div class="mb-3">
-                <label for="identificacion" class="form-label">Introduce el ID del proveedor</label>
-                <input type="text" class="form-control" name="identificacion" id="identificacion">
-            </div>
-
-            <div class="mb-3">
-                <label for="municipio" class="form-label">Introduce el municipio del proveedor</label>
-                <input type="text" class="form-control" name="municipio" id="municipio">
-            </div>
-
-            <!-- Botones -->
-            <!-- este es el boton para consultar los proveedores -->
-            <button type="button" class="btn btn-success m-3" onclick="crearTablaContactos()">Mostrar proveedores</button>
-
-            <!-- cuando le damos clic a este boton es que se abre el "post" -->
-            <button type="submit" class="btn btn-primary">Crear proveedor</button>
-
-
-        </form>
-
+        <!-- Botones superiores -->
+        <!-- este es el boton para consultar los proveedores -->
+        <button type="button" class="btn btn-success m-2" onclick="crearTablaContactos()">Mostrar proveedores</button>
+        <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#crearContactoModal">
+            Nuevo contacto
+        </button>
+        
     </div>
 
     <!-- Tabla de contactos -->
@@ -56,7 +36,66 @@
             <div class="toast-body" id="mensajeNotificacion">
             </div>
         </div>
-    </div>  
+    </div>
+    
+    <!-- Formulario Modal -->
+    
+    
+    <!-- Modal -->
+    <div class="modal fade" id="crearContactoModal" tabindex="-1" aria-labelledby="tituloCrearContactoModal" aria-hidden="true">
+
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                    
+                    <h5 class="modal-title" id="tituloCrearContactoModal">Nuevo contacto</h5>
+                    <!-- este es el boton de la "X" para cerrar el modal, pero lo quitamos para no tener tanto código -->
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+
+                </div>
+                
+                <!-- aqui insertamos el formulario -->
+                <!-- nos toca modificar la función "crearContacto(), que es la que se ejecuta cuando hacemos el submit, ya que este submit no abre otra página, ya que es de tipo "dialog", entonces en el momento que hagamos clic, tendremos que decirle que cierre este formulario, despues de grabar el contacto -->
+                <form onsubmit="crearContacto()" method="dialog" id="formulario">
+
+                    <div class="modal-body">
+                        
+                        <!-- creamos cada uno de los campos del formulario -->
+                        <!-- el atributo required lo ponemos para que sea obligatorio llenarlo en el formulario -->
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Introduce el nombre del proveedor</label>
+                            <input type="text" class="form-control" name="nombre" id="nombre" required>
+                        </div>
+            
+                        <div class="mb-3">
+                            <label for="identificacion" class="form-label">Introduce el ID del proveedor</label>
+                            <input type="text" class="form-control" name="identificacion" id="identificacion" required>
+                        </div>
+            
+                        <div class="mb-3">
+                            <label for="municipio" class="form-label">Introduce el municipio del proveedor</label>
+                            <input type="text" class="form-control" name="municipio" id="municipio" required>
+                        </div>
+
+                    </div>
+
+                    <div class="modal-footer">
+
+                        <!-- estos son los botones internos del formulario -->
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Crear proveedor</button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
     
     
 </main>

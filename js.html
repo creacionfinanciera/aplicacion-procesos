@@ -8,6 +8,12 @@
         let nombre = document.getElementById('nombre').value;
         let municipio = document.getElementById('municipio').value;
 
+        // cerrar modal
+        // vamos a la página de bootstrap para obtener la instancia del modal
+        let myModalEl = document.getElementById('crearContactoModal');
+        let modal = bootstrap.Modal.getInstance(myModalEl).hide();
+        // y le agregamos el metodo .hide() para ocultarlo 
+     
         // eliminamos la tabla
         eliminarTabla();
 

@@ -112,6 +112,12 @@ Nota: Al correr el código de éste punto me saca un error, y no logre soluciona
 
 Esta metodología es para ingresar contactos en la base de datos a través de un formulario incrustado en la misma página.
 
+## Creación de formulario modal para ingresar contactos
+
+1. Vamos a la página `https://getbootstrap.com/docs/5.0/getting-started/introduction/`
+2. Vamos a la seccion componenetes/modal
+3. Seleccionamos el modal `Live demo` y copiamos el código
+4. Pegamos el código en el archivo `main.html` y comenzamos a personalizarlo de acuerdo con nuestras necesidades.
 
 
 
