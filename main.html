@@ -44,13 +44,13 @@
     <!-- Modal -->
     <div class="modal fade" id="crearContactoModal" tabindex="-1" aria-labelledby="tituloCrearContactoModal" aria-hidden="true">
 
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
 
             <div class="modal-content">
                 
                 <div class="modal-header">
                     
-                    <h5 class="modal-title" id="tituloCrearContactoModal">Nuevo contacto</h5>
+                    <h5 class="modal-title" id="tituloCrearContactoModal">Nuevo Proveedor</h5>
                     <!-- este es el boton de la "X" para cerrar el modal, pero lo quitamos para no tener tanto código -->
                     <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
 
@@ -64,20 +64,164 @@
                         
                         <!-- creamos cada uno de los campos del formulario -->
                         <!-- el atributo required lo ponemos para que sea obligatorio llenarlo en el formulario -->
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Introduce el nombre del proveedor</label>
-                            <input type="text" class="form-control" name="nombre" id="nombre" required>
+                        <!-- el atributo pattern="[\D]*" junto con el title, sirven para evitar que el usuario coloque números en este campo -->
+                        <!-- el atributo pattern="[\d]{9,11}" junto con el title, sirven para asegurar que el usuario coloque entre 9 y 11 caracteres numericos en este campo -->
+
+                        <!-- Razón Social, NIT y DV -->
+
+                        <div class="row mb-3 g-2">
+
+                            <div class="col-7">
+                                
+                                <label for="nombre" class="form-label">Razón Social</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-building-fill"></i></span>
+                                    <input type="text" class="form-control" name="nombre" id="nombre" pattern="[\D]*" title="El nombre no puede contener números" placeholder="Nombre completo" required>
+                                </div>
+
+                            </div>
+
+                            <div class="col-5">
+                                
+                                <label for="nit" class="form-label">Identificación</label>
+
+                                <div class="input-group">
+                                    
+                                    <span class="input-group-text"><i class="bi bi-person-vcard-fill"></i></span>
+                                    <input type="text" class="form-control nit-input" name="nit" id="nit" placeholder="NIT" required>
+                                    <input type="text" class="form-control dv-input" name="dv" id="dv" placeholder="DV" required>
+                                    
+                                </div>
+
+                            </div>
+
+                            
                         </div>
-            
-                        <div class="mb-3">
-                            <label for="identificacion" class="form-label">Introduce el ID del proveedor</label>
-                            <input type="text" class="form-control" name="identificacion" id="identificacion" required>
-                        </div>
-            
-                        <div class="mb-3">
-                            <label for="municipio" class="form-label">Introduce el municipio del proveedor</label>
-                            <input type="text" class="form-control" name="municipio" id="municipio" required>
-                        </div>
+
+                        <!-- Dirección, Municipio y Departamento -->
+                        <div class="row mb-3 g-3">
+
+                            <div class="col-6">
+                            
+                                <label for="direccion" class="form-label">Dirección</label>
+
+                                <div class="input-group">
+                                    
+                                    <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
+                                    <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Ubicación" required>
+
+                                </div>
+
+                               
+                            </div>
+
+                            <div class="col-3">
+                                        
+                                <label for="municipio" class="form-label">Municipio</label>
+
+                                <div class="input-group">
+
+                                    <span class="input-group-text"><i class="bi bi-flag-fill"></i></span>
+                                    <input type="text" class="form-control" name="municipio" id="municipio" placeholder="Municipio" required>
+                                
+                                </div>
+
+                                
+                            </div>
+
+                            <div class="col-3">
+                                
+                                <label for="departamento" class="form-label">Departamento</label>
+                                
+                                <div class="input-group">
+                                    
+                                    <span class="input-group-text"><i class="bi bi-map-fill"></i></span>
+                                    <input type="text" class="form-control" name="departamento" id="departamento" placeholder="Departamento" required>
+
+                                </div>
+                                
+
+                            </div>
+
+                        </div> 
+
+                        <!-- Correo electrónico y Celular -->
+                        <div class="row mb-3 g-2">
+
+                            <div class="col-5">
+                                
+                                <label for="correo" class="form-label">Correo Electrónico</label>
+                                
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-envelope-fill"></i></span>
+                                    <input type="email" class="form-control" name="correo" id="correo"  placeholder="Correo electrónico" required>
+                                </div>
+                                
+                            </div>
+
+                            <div class="col-3">
+                                
+                                <label for="celular" class="form-label">Celular</label>
+                                
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-telephone-fill"></i></span>
+                                    <input type="tel" class="form-control" name="celular" id="celular" pattern="[\d]{9,11}" title="El teléfono debe contener entre 9 y 11 dígitos numéricos"  placeholder="Celular" required>
+                                </div>
+
+                            </div>
+
+                        </div> 
+
+                        <!-- Tipo de facturación y Reteica -->
+                        <!-- <div class="row mb-3 g-2">
+
+                            <div class="col-4">
+                                <label for="tipoFacturacion" class="form-label">Tipo de Facturación</label>
+                                <select class="form-select" aria-label="Default select example" name="tipoFacturacion" id="tipoFacturacion" required>
+                                    <option selected>Selecciona una opción</option>
+                                    <option value="1">Cuenta de cobro</option>
+                                    <option value="2">Facturación electrónica</option>
+                                </select>
+                            </div>
+
+                            <div class="col-3">
+                                <label for="reteica" class="form-label">Reteica</label>
+                                <input type="text" class="form-control" name="reteica" id="reteica" required>
+                            </div>
+
+                        </div> -->
+
+                        <!-- Flete Negociado, Valor Flete, Acuerdo Comercial, Valor Acuerdo -->
+                        <!-- <div class="row mb-3 g-4">
+
+                            <div class="col-3">
+                                <label for="fleteNegociado" class="form-label">Flete Negociado</label>
+                                <input type="text" class="form-control" name="fleteNegociado" id="fleteNegociado" required>
+                            </div>
+
+                            <div class="col-3">
+                                <label for="valorFlete" class="form-label">Valor Flete</label>
+                                <input type="text" class="form-control" name="valorFlete" id="valorFlete" required>
+                            </div>
+
+                            <div class="col-3">
+                                <label for="acuerdoComercial" class="form-label">Acuerdo Comercial</label>
+                                <input type="text" class="form-control" name="acuerdoComercial" id="acuerdoComercial" required>
+                            </div>
+
+                            <div class="col-3">
+                                <label for="valorAcuerdo" class="form-label">Valor Acuerdo</label>
+                                <input type="text" class="form-control" name="valorAcuerdo" id="valorAcuerdo" required>
+                            </div>
+
+                        </div> -->
+
+                        <!-- Estado proveedor -->
+                        <!-- <div class="row mb-3 g-1">
+                            <label for="estadoProveedor" class="form-label">Estado del Proveedor</label>
+                            <input type="text" class="form-control" name="estadoProveedor" id="estadoProveedor" required>
+                        </div> -->
 
                     </div>
 

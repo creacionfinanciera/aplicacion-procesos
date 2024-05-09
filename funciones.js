@@ -45,8 +45,15 @@ function obtenerContactos() {
 
 // esta es la función que inserta un nuevo contacto
 // Nota: el orden de los parametros, es el orden en el que se insertaran los registros en la base de datos!
-function insertarContacto(identificacion, nombre, municipio) {
+function insertarContacto(identificacion, razonSocial, direccion, municipio, departamento, correo, celular) {
     
-    hojaProveedores.appendRow([identificacion,nombre,municipio]);
+    hojaProveedores.appendRow([identificacion, razonSocial, direccion, municipio, departamento, correo, celular]);
 
 }
+
+// esta es la función que borra un contacto existente
+function borrarContacto(numFila) {
+
+    hojaProveedores.deleteRow(numFila);
+
+} 

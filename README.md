@@ -119,6 +119,12 @@ Esta metodología es para ingresar contactos en la base de datos a través de un
 3. Seleccionamos el modal `Live demo` y copiamos el código
 4. Pegamos el código en el archivo `main.html` y comenzamos a personalizarlo de acuerdo con nuestras necesidades.
 
+## Reorganización campos formulario y validaciones
+
+1. Vamos a la página de Bootstrap
+2. Vamos a la sección de `Forms`
+3. Y a la subsección de `Layout`, para escoger la forma de formulario que mas se adapte a lo que queremos.
+
 
 
 
