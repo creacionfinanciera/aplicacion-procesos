@@ -11,9 +11,7 @@
         <!-- Botones superiores -->
         <!-- este es el boton para consultar los proveedores -->
         <button type="button" class="btn btn-success m-2" onclick="crearTablaContactos()">Mostrar proveedores</button>
-        <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#crearContactoModal">
-            Nuevo contacto
-        </button>
+        <button type="button" class="btn btn-primary m-2" onclick="abrirModalCrearContacto()">Crear proveedor</button>
         
     </div>
 
@@ -49,8 +47,8 @@
             <div class="modal-content">
                 
                 <div class="modal-header">
-                    
-                    <h5 class="modal-title" id="tituloCrearContactoModal">Nuevo Proveedor</h5>
+                    <!-- modificamos el id para manipular desde javascript el titulo del modal, dependiendo si se va a crear o modificar un proveedor -->
+                    <h5 class="modal-title" id="tituloModal">Nuevo Proveedor</h5>
                     <!-- este es el boton de la "X" para cerrar el modal, pero lo quitamos para no tener tanto código -->
                     <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
 
@@ -229,7 +227,8 @@
 
                         <!-- estos son los botones internos del formulario -->
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-success">Crear proveedor</button>
+                        <!-- este botón lo vamos a manipular con javascript, para que dependiendo de si estamos modificando o insertando, actue de una forma u otra, para eso insertamos el id="botonCrearModificar" -->
+                        <button id="botonCrearModificar" type="submit" class="btn btn-success">Crear proveedor</button>
 
                     </div>
 

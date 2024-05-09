@@ -45,9 +45,9 @@ function obtenerContactos() {
 
 // esta es la función que inserta un nuevo contacto
 // Nota: el orden de los parametros, es el orden en el que se insertaran los registros en la base de datos!
-function insertarContacto(identificacion, razonSocial, direccion, municipio, departamento, correo, celular) {
+function insertarContacto(identificacion, nit, dv, razonSocial, direccion, municipio, departamento, correo, celular) {
     
-    hojaProveedores.appendRow([identificacion, razonSocial, direccion, municipio, departamento, correo, celular]);
+    hojaProveedores.appendRow([identificacion, nit, dv, razonSocial, direccion, municipio, departamento, correo, celular]);
 
 }
 
@@ -56,4 +56,14 @@ function borrarContacto(numFila) {
 
     hojaProveedores.deleteRow(numFila);
 
-} 
+}
+
+// esta es la función que modifica un contacto existente
+
+function modificarContacto(numFila, datos) {
+
+    let celdas = hojaProveedores.getRange('A'+numFila+':I'+numFila);
+    // el método setValues recibe una matriz, por lo tanto ponemos doble corchete, en este caso sería una matriz de una unica fila
+    celdas.setValues([[datos.identificacion, datos.nit, datos.dv, datos.razonSocial, datos.direccion, datos.municipio, datos.departamento, datos.correo, datos.celular]]);
+
+}

@@ -28,7 +28,7 @@
         google.script.run
         .withSuccessHandler(contactoInsertadoCorrectamente)
         .withFailureHandler(contactoInsertadoError)
-        .insertarContacto(identificacion, razonSocial, direccion, municipio, departamento, correo, celular);
+        .insertarContacto(identificacion, nit, dv, razonSocial, direccion, municipio, departamento, correo, celular);
 
     }
 
@@ -138,7 +138,7 @@
 
             }
             // agregar los botones a la fila
-            fila.appendChild(crearCeldaBotones(i+1));
+            fila.appendChild(crearCeldaBotones(i+1,obj[i]));
             tablaBody.appendChild(fila);
             
         }
@@ -163,7 +163,7 @@
 
     }
 
-    function crearCeldaBotones(numFila) {
+    function crearCeldaBotones(numFila, datosContacto) {
 
         // crear celda
         let celda = document.createElement('td');
@@ -181,7 +181,7 @@
 
         // crear boton modificar
         let botonModificar = document.createElement('button');
-        botonModificar.onclick = () => borrarContacto(numFila);
+        botonModificar.onclick = () => abrirModalModificarContacto(numFila, datosContacto);
         botonModificar.classList.add('btn','btn-warning','m-1');
 
         // icono modificar
@@ -194,6 +194,120 @@
         celda.appendChild(botonModificar);
         
         return celda;
+
+    }
+
+    // esta es la función para abrir el modal en modo crear    
+    function abrirModalCrearContacto() {
+
+        // boton crear
+        // aqui vamos a reutilizar el modal que ya tenemos en el archivo de html, y para no tener que crear otro modal, manipularemos con javascript el que ya tenemos desde aqui, únicamente tendremos que crear un id, para llamarlo desde aqui
+        let boton = document.getElementById('botonCrearModificar'); 
+        // siempre que hagamos clic en un boton de modificar sobre cualquier proveedor, entonces el modal cambiará
+        boton.textContent = 'Crear proveedor'
+        boton.classList = '';
+        boton.classList.add('btn','btn-success');
+
+        // tambien tendriamos que manipular el título de modal, y para eso modificamos el id en el html id="tituloModal"
+        document.getElementById('tituloModal').textContent = 'Crear proveedor'; 
+
+        // modificar submit, que será la función que se ejecutará cuando hagamos clic en el botón
+        document.getElementById('formulario').onsubmit = () => crearContacto();
+
+        // vaciar los campos del formulario
+        document.getElementById('nit').value = '';
+        document.getElementById('dv').value = '';
+        document.getElementById('nombre').value = '';
+        document.getElementById('direccion').value = '';
+        document.getElementById('municipio').value = '';
+        document.getElementById('departamento').value = '';
+        document.getElementById('correo').value = '';
+        document.getElementById('celular').value = '';
+
+        // abrir modal
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).show();    
+
+
+    }
+    
+    // esta es la función para abrir el modal en modo modificar
+    function abrirModalModificarContacto(numFila, datosContacto) {
+
+        // boton modificar
+        // aqui vamos a reutilizar el modal que ya tenemos en el archivo de html, y para no tener que crear otro modal, manipularemos con javascript el que ya tenemos desde aqui, únicamente tendremos que crear un id, para llamarlo desde aqui
+        let boton = document.getElementById('botonCrearModificar'); 
+        // siempre que hagamos clic en un boton de modificar sobre cualquier proveedor, entonces el modal cambiará
+        boton.textContent = 'Modificar proveedor'
+        boton.classList = '';
+        boton.classList.add('btn','btn-warning');
+
+        // tambien tendriamos que manipular el título de modal, y para eso modificamos el id en el html id="tituloModal"
+        document.getElementById('tituloModal').textContent = 'Modificar proveedor'; 
+
+        // modificar submit, que será la función que se ejecutará cuando hagamos clic en el botón
+        document.getElementById('formulario').onsubmit = () => modificarContacto(numFila);
+
+        // obtener datos de la hoja de cálculo, para mostrarlos en el formulario
+        document.getElementById('nit').value = datosContacto[1];
+        document.getElementById('dv').value = datosContacto[2];
+        document.getElementById('nombre').value = datosContacto[3];
+        document.getElementById('direccion').value = datosContacto[4];
+        document.getElementById('municipio').value = datosContacto[5];
+        document.getElementById('departamento').value = datosContacto[6];
+        document.getElementById('correo').value = datosContacto[7];
+        document.getElementById('celular').value = datosContacto[8];
+
+        // abrir modal
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).show();
+
+    }
+
+    function modificarContacto(numFila) {
+
+        // cerrar modal
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('crearContactoModal')).hide();
+        
+        // obtener nuevos datos a partir del formulario, despues de que el usuario los modifique
+        let razonSocial = document.getElementById('nombre').value;
+        let nit = document.getElementById('nit').value;
+        let dv = document.getElementById('dv').value;
+        let identificacion = nit+''+dv;
+        let direccion = document.getElementById('direccion').value;
+        let municipio = document.getElementById('municipio').value;
+        let departamento = document.getElementById('departamento').value;
+        let correo = document.getElementById('correo').value;
+        let celular = document.getElementById('celular').value;
+
+        // eliminar tabla
+        eliminarTabla();
+
+        // crear loader
+        // crearLoaderPuntos('divContactos');
+
+        google.script.run
+        .withSuccessHandler(contactoModificadoCorrectamente)
+        .withFailureHandler(contactoModificadoError)
+        .modificarContacto(numFila, {identificacion, nit, dv, razonSocial, direccion, municipio, departamento, correo, celular});
+
+    }
+
+    function contactoModificadoCorrectamente() {
+
+        // mostrar notificacion
+        crearNotificacionOK('Contacto modificado correctamente','MODIFICADO OK')
+
+        // eliminar loader
+        // eliminarLoader();
+
+        // mostramos la tabla
+        crearTablaContactos();
+
+    }
+    function contactoModificadoError() {
+
+        crearNotificacionError('No se ha podido modificar el contacto','ERROR');
+        // eliminarLoader();
+        crearTablaContactos();
 
     }
 
@@ -343,81 +457,6 @@
 
         let tabla = document.getElementById('tablaContactos');
         if (tabla) tabla.remove();
-
-    }
-
-
-
-
-
-
-    //  con esta función vamos a crear la tabla
-    function crearTablaContactosCorrectamente2(obj) {
-        // y acontinuaión siempre creamos nueva, la tabla en html
-        tabla = document.createElement('table');
-        // le creamos a la tabla un identificador
-        tabla.id = 'tablaContactos';
-
-        // dentro de una tabla en html, podemos tener un "header" y un "body"
-        // aqui creamos el "header"
-        let tablaHeader = document.createElement('thead');              
-        // aqui creamos el "body", dentro de este cuerpo vamos a insertar cada uno de los datos que nos encontremos en el parametro "obj", que es el objeto dónde se encuentran todos los datos
-        let tablaBody = document.createElement('tbody');
-        // asi recorremos el objeto dónde se encuentran los datos, a través de un bucle doble, tenemos un forEach que nos recorre cada una de las filas, y por cada una de esas filas tenemos un forEach que nos recorre cada una de las celdas, entonces el bucle interno lo que hace es ir creando cada una de las celdas, ponerle texto y añadirla a la fila
-        // pero debemos evaluarlo y cuando sea la primera fila, no debemos añadir la fila a la "tablaBody", sino que la debemos añadir a la "tablaHeader", entonces necesitamos un indice que nos permita hacer esto
-
-        
-        for (let i = 0; i < obj.length; i++) {
-
-            // HEADER DE LA TABLA
-            // primero creamos la fila
-            let primeraFila = document.createElement('tr');
-            // ahora añadir a esa fila cada una de las celdas
-            for (let j = 0; j < obj[i].length; j++) {
-
-                // creamos la celda
-                let celda = document.createElement('td');
-                // Guardamos dentro de la celda el contenido
-                celda.textContent = obj[i][j];
-                // Una vez la celda tiene el texto, ya podemos podemos añadir la celda a la fila
-                primeraFila.appendChild(celda); 
-
-            }
-            
-            // evalúa si el índice es 0
-            if (i == 0) {
-
-                // inserta la primera fila a la "tablaHeader"
-                tablaHeader.appendChild(fila);
-                // agrega el header a la tabla
-                tabla.appendChild(tablaHeader);
-
-            } else {
-
-                // inserta la fila que ya tendra adentro cada una de las celdas
-                tablaBody.appendChild(fila);
-
-            }
-
-        }
-
-        // agreguemos clases a la cabecera
-        tablaHeader.classList.add('table-dark');
-        
-        // ya tenemos cada una de las filas agregadas al body, y ahora lo que falta es agregar el body a la tabla
-        tabla.appendChild(tablaBody);
-        
-        // con lo anterior ya tenemos la tabla montada, ahora lo que vamos a hacer es añadir una serie de clases de Bootstrapt, por ejemplo la clase "table-success", la encontramos en la página de bootstrap, buscando por tabla
-        tabla.classList.add('table','table-striped','border','border-4','border-dark', 'table-success');
-        
-        // en este punto ya podemos añadir la tabla a la estructura principal de la página, y esto lo vamos a insertar en el "div" que hemos creado previamente en el "main", con el id="divContactos"
-        document.getElementById('divContactos').appendChild(tabla);
-
-        // mostrar notificación de OK
-        crearNotificacionOK('Proveedores obtenidos correctamente', 'Todo en orden')
-
-        // eliminaremos el loader
-        // eliminarLoader(); // este codigo no funciona entonces lo dejo comentado
 
     }
 
